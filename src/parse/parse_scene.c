@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_scene.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toyamagu <toyamagu@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:28:39 by toyamagu          #+#    #+#             */
-/*   Updated: 2026/05/24 15:32:21 by toyamagu         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:51:36 by mrio             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,10 @@ int	parse_scene_lines(t_game *game, char **lines)
 	int	i;
 	int	start;
 	int	height;
-	i = 0; start = -1; height = 0;
+
+	i = 0;
+	start = -1;
+	height = 0;
 	while (lines[i])
 	{
 		if (is_empty_line(lines[i]) && start >= 0)

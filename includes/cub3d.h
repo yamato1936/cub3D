@@ -135,6 +135,8 @@ int		load_game(t_game *game, const char *path);
 int		start_game(t_game *game);
 int		parse_file(t_game *game, const char *path);
 int		validate_scene(t_game *game);
+int		scan_map_cells(t_game *game);
+int		check_map_closed(t_game *game);
 int		parse_element_line(t_game *game, char *line);
 int		parse_color_line(t_color *color, char *line);
 char	**split_lines(char *text);

@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: toyamagu <toyamagu@student.42tokyo.jp>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/05/24 15:31:52 by toyamagu          #+#    #+#              #
-#    Updated: 2026/05/24 15:32:21 by toyamagu         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Iincludes -Iminilibx-linux
@@ -28,6 +16,7 @@ SRC = src/main/main.c \
 	src/parse/parse_scene.c \
 	src/parse/validate_map.c \
 	src/parse/validate_cells.c \
+	src/parse/validate_closed.c \
 	src/render/render_frame.c \
 	src/render/ray_setup.c \
 	src/render/ray_dda.c \

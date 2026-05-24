@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toyamagu <toyamagu@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:28:45 by toyamagu          #+#    #+#             */
-/*   Updated: 2026/05/24 15:32:21 by toyamagu         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:52:19 by mrio             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ static int	normalize_map(t_game *game)
 
 int	validate_scene(t_game *game)
 {
-	int	scan_map_cells(t_game *game);
-	int	check_map_closed(t_game *game);
-
 	if (!game->map.grid || game->map.height <= 0)
 		return (error_msg("map is missing"));
 	if (!normalize_map(game))

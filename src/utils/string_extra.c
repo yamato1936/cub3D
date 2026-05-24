@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   string_extra.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: toyamagu <toyamagu@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:30:25 by toyamagu          #+#    #+#             */
-/*   Updated: 2026/05/24 15:32:21 by toyamagu         ###   ########.fr       */
+/*   Updated: 2026/05/24 15:54:26 by mrio             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	is_map_line(const char *s)
 		return (0);
 	if ((*s == 'F' || *s == 'C') && ft_isspace(s[1]))
 		return (0);
-	return (*s == '0' || *s == '1' || *s == 'N'
-		|| *s == 'S' || *s == 'E' || *s == 'W');
+	return (*s == '0' || *s == '1' || *s == 'N' || *s == 'S' || *s == 'E'
+		|| *s == 'W');
 }
