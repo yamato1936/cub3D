@@ -1,0 +1,23 @@
+NO assets/textures/north.xpm
+SO assets/textures/south.xpm
+WE assets/textures/west.xpm
+EA assets/textures/east.xpm
+
+F 225,0,200
+C 100,100,100
+
+111111111111111
+1             1
+1             1
+1             1
+1             1
+1             1
+1       W     1
+1             1
+1             1
+1             1
+1             1
+1             1
+1             1
+1             1
+111111111111111
