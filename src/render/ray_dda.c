@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ray_dda.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/24 15:29:50 by toyamagu          #+#    #+#             */
+/*   Updated: 2026/05/24 15:54:15 by mrio             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	run_dda(t_game *game, t_ray *ray)
@@ -24,11 +36,11 @@ void	run_dda(t_game *game, t_ray *ray)
 void	finish_ray(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perp_dist = (ray->map_x - game->player.x
-				+ (1 - ray->step_x) / 2.0) / ray->ray_dir_x;
+		ray->perp_dist = (ray->map_x - game->player.x + (1 - ray->step_x) / 2.0)
+			/ ray->ray_dir_x;
 	else
-		ray->perp_dist = (ray->map_y - game->player.y
-				+ (1 - ray->step_y) / 2.0) / ray->ray_dir_y;
+		ray->perp_dist = (ray->map_y - game->player.y + (1 - ray->step_y) / 2.0)
+			/ ray->ray_dir_y;
 	if (ray->perp_dist < 0.001)
 		ray->perp_dist = 0.001;
 	ray->line_height = (int)(WIN_H / ray->perp_dist);

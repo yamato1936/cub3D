@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/24 15:28:45 by toyamagu          #+#    #+#             */
+/*   Updated: 2026/05/24 15:52:19 by mrio             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static int	max_width(t_map *map)
@@ -55,9 +67,6 @@ static int	normalize_map(t_game *game)
 
 int	validate_scene(t_game *game)
 {
-	int	scan_map_cells(t_game *game);
-	int	check_map_closed(t_game *game);
-
 	if (!game->map.grid || game->map.height <= 0)
 		return (error_msg("map is missing"));
 	if (!normalize_map(game))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/24 15:28:36 by toyamagu          #+#    #+#             */
+/*   Updated: 2026/05/24 15:51:35 by mrio             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static int	count_lines(char *text)
@@ -33,6 +45,15 @@ static char	*dup_line(char *start, int len)
 	return (line);
 }
 
+static int	add_line(char **lines, int *row, char *start, int len)
+{
+	lines[*row] = dup_line(start, len);
+	if (!lines[*row])
+		return (0);
+	(*row)++;
+	return (1);
+}
+
 static int	fill_lines(char **lines, char *text)
 {
 	int	i;
@@ -44,13 +65,19 @@ static int	fill_lines(char **lines, char *text)
 	start = 0;
 	while (text[i])
 	{
-		if (text[i] == '\n' && !((lines[row++] = dup_line(text + start, i - start))))
-			return (0);
+		if (text[i] == '\n')
+		{
+			if (!add_line(lines, &row, text + start, i - start))
+				return (0);
+		}
 		if (text[i++] == '\n')
 			start = i;
 	}
-	if (i > start && !((lines[row++] = dup_line(text + start, i - start))))
-		return (0);
+	if (i > start)
+	{
+		if (!add_line(lines, &row, text + start, i - start))
+			return (0);
+	}
 	lines[row] = NULL;
 	return (1);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_elements.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/24 15:28:31 by toyamagu          #+#    #+#             */
+/*   Updated: 2026/05/24 15:51:31 by mrio             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static char	*dup_trimmed(char *line)
@@ -60,6 +72,6 @@ int	parse_element_line(t_game *game, char *line)
 
 int	scene_has_all_elements(t_game *game)
 {
-	return (game->no.path && game->so.path && game->we.path
-		&& game->ea.path && game->floor.r >= 0 && game->ceiling.r >= 0);
+	return (game->no.path && game->so.path && game->we.path && game->ea.path
+		&& game->floor.r >= 0 && game->ceiling.r >= 0);
 }

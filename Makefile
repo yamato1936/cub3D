@@ -16,6 +16,7 @@ SRC = src/main/main.c \
 	src/parse/parse_scene.c \
 	src/parse/validate_map.c \
 	src/parse/validate_cells.c \
+	src/parse/validate_closed.c \
 	src/render/render_frame.c \
 	src/render/ray_setup.c \
 	src/render/ray_dda.c \
