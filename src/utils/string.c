@@ -6,7 +6,7 @@
 /*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:30:29 by toyamagu          #+#    #+#             */
-/*   Updated: 2026/05/24 15:54:27 by mrio             ###   ########.fr       */
+/*   Updated: 2026/05/27 13:16:00 by mrio             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,13 @@ void	*ft_calloc(size_t count, size_t size)
 int	has_cub_extension(const char *path)
 {
 	size_t	len;
+	size_t	name_start;
 
 	len = ft_strlen(path);
-	if (len < 4)
+	name_start = len;
+	while (name_start > 0 && path[name_start - 1] != '/')
+		name_start--;
+	if (len - name_start <= 4)
 		return (0);
 	return (!ft_strcmp(path + len - 4, ".cub"));
 }
