@@ -6,7 +6,7 @@
 /*   By: mrio <mrio@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:28:39 by toyamagu          #+#    #+#             */
-/*   Updated: 2026/05/24 15:51:36 by mrio             ###   ########.fr       */
+/*   Updated: 2026/05/27 13:31:00 by mrio             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ static void	register_map_line(int *start, int *height, int index)
 	(*height)++;
 }
 
+static void	trim_trailing_empty_lines(char **lines, int start, int *height)
+{
+	while (*height > 0 && is_empty_line(lines[start + *height - 1]))
+		(*height)--;
+}
+
 int	parse_scene_lines(t_game *game, char **lines)
 {
 	int	i;
@@ -39,9 +45,7 @@ int	parse_scene_lines(t_game *game, char **lines)
 	height = 0;
 	while (lines[i])
 	{
-		if (is_empty_line(lines[i]) && start >= 0)
-			return (error_msg("empty line inside map"));
-		if (is_empty_line(lines[i]))
+		if (is_empty_line(lines[i]) && start < 0)
 			;
 		else if (start < 0 && !is_map_line(lines[i]))
 		{
@@ -52,7 +56,9 @@ int	parse_scene_lines(t_game *game, char **lines)
 			register_map_line(&start, &height, i);
 		i++;
 	}
-	if (start < 0 || !scene_has_all_elements(game))
+	if (start >= 0)
+		trim_trailing_empty_lines(lines, start, &height);
+	if (start < 0 || height <= 0 || !scene_has_all_elements(game))
 		return (error_msg("scene is missing mandatory data"));
 	return (store_map(game, lines, start, height));
 }
