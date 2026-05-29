@@ -64,17 +64,6 @@ static char	*read_scene(int fd)
 	return (text);
 }
 
-static int	is_scene_too_large(const char *path)
-{
-	struct stat	st;
-
-	if (stat(path, &st) != 0)
-		return (0);
-	if (st.st_size < 0)
-		return (0);
-	return (st.st_size > (off_t)MAX_CUB_BYTES);
-}
-
 static char	*load_scene(const char *path)
 {
 	int		fd;
@@ -82,8 +71,6 @@ static char	*load_scene(const char *path)
 
 	if (!has_cub_extension(path))
 		return (error_msg("scene file must use the .cub extension"), NULL);
-	if (is_scene_too_large(path))
-		return (error_msg("scene file exceeds size limit"), NULL);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (error_msg("could not open scene file"), NULL);

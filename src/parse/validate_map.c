@@ -44,17 +44,12 @@ static void	fill_row(char *dst, char *src, size_t width)
 
 static int	validate_map_dimensions(size_t width, size_t height)
 {
-	size_t	cells;
-
 	if (width > MAX_MAP_WIDTH)
 		return (error_msg("map width exceeds limit"));
 	if (height > MAX_MAP_HEIGHT)
 		return (error_msg("map height exceeds limit"));
 	if (height != 0 && width > SIZE_MAX / height)
 		return (error_msg("map dimensions overflow"));
-	cells = width * height;
-	if (cells > MAX_MAP_CELLS)
-		return (error_msg("map exceeds cell limit"));
 	return (1);
 }
 

@@ -42,6 +42,8 @@ static int	parse_scene_line(t_game *game, char *line, size_t index,
 		state[0] = index;
 		state[2] = 1;
 	}
+	if (ft_strlen(line) > MAX_MAP_WIDTH)
+		return (error_msg("map width exceeds limit"));
 	state[1]++;
 	return (1);
 }
