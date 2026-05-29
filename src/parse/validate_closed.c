@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3d.h"
 
-static int	is_open_cell(t_game *game, int x, int y)
+static int	is_open_cell(t_game *game, size_t x, size_t y)
 {
 	char	**grid;
 
@@ -25,8 +25,8 @@ static int	is_open_cell(t_game *game, int x, int y)
 
 int	check_map_closed(t_game *game)
 {
-	int		x;
-	int		y;
+	size_t	x;
+	size_t	y;
 	char	c;
 
 	y = 0;

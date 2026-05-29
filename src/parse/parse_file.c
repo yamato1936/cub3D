@@ -12,21 +12,31 @@
 
 #include "../../includes/cub3d.h"
 
-static char	*join_chunk(char *text, int size, char *buf, int len)
+static char	*join_chunk(char *text, size_t size, char *buf, ssize_t len)
 {
 	char	*new_text;
-	int		i;
+	size_t	i;
+	size_t	chunk_len;
 
-	new_text = malloc(size + len + 1);
+	chunk_len = (size_t)len;
+	if (size > SIZE_MAX - chunk_len - 1)
+		return (free(text), NULL);
+	new_text = malloc(size + chunk_len + 1);
 	if (!new_text)
 		return (free(text), NULL);
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
+	{
 		new_text[i] = text[i];
-	i = -1;
-	while (++i < len)
+		i++;
+	}
+	i = 0;
+	while (i < chunk_len)
+	{
 		new_text[size + i] = buf[i];
-	new_text[size + len] = '\0';
+		i++;
+	}
+	new_text[size + chunk_len] = '\0';
 	return (free(text), new_text);
 }
 
@@ -34,19 +44,22 @@ static char	*read_scene(int fd)
 {
 	char	buf[1024];
 	char	*text;
-	int		size;
-	int		len;
+	size_t	size;
+	ssize_t	len;
 
 	text = ft_strdup("");
 	size = 0;
-	len = 1;
-	while (text && len > 0)
+	while (text)
 	{
 		len = read(fd, buf, sizeof(buf));
 		if (len < 0)
 			return (free(text), NULL);
+		if (len == 0)
+			break ;
 		text = join_chunk(text, size, buf, len);
-		size += len;
+		if (!text)
+			return (NULL);
+		size += (size_t)len;
 	}
 	return (text);
 }

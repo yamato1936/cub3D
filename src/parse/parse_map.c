@@ -12,10 +12,10 @@
 
 #include "../../includes/cub3d.h"
 
-static int	count_lines(char *text)
+static size_t	count_lines(char *text)
 {
-	int	i;
-	int	count;
+	size_t	i;
+	size_t	count;
 
 	if (!text[0])
 		return (0);
@@ -30,22 +30,25 @@ static int	count_lines(char *text)
 	return (count);
 }
 
-static char	*dup_line(char *start, int len)
+static char	*dup_line(char *start, size_t len)
 {
 	char	*line;
-	int		i;
+	size_t	i;
 
 	line = malloc(len + 1);
 	if (!line)
 		return (NULL);
-	i = -1;
-	while (++i < len)
+	i = 0;
+	while (i < len)
+	{
 		line[i] = start[i];
+		i++;
+	}
 	line[len] = '\0';
 	return (line);
 }
 
-static int	add_line(char **lines, int *row, char *start, int len)
+static int	add_line(char **lines, size_t *row, char *start, size_t len)
 {
 	lines[*row] = dup_line(start, len);
 	if (!lines[*row])
@@ -56,9 +59,9 @@ static int	add_line(char **lines, int *row, char *start, int len)
 
 static int	fill_lines(char **lines, char *text)
 {
-	int	i;
-	int	row;
-	int	start;
+	size_t	i;
+	size_t	row;
+	size_t	start;
 
 	i = 0;
 	row = 0;
@@ -84,7 +87,7 @@ static int	fill_lines(char **lines, char *text)
 
 char	**split_lines(char *text)
 {
-	int		count;
+	size_t	count;
 	char	**lines;
 
 	count = count_lines(text);

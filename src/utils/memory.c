@@ -24,9 +24,9 @@ void	free_grid(char **grid)
 	free(grid);
 }
 
-char	**dup_grid(const char **src, int count)
+char	**dup_grid(const char **src, size_t count)
 {
-	int		i;
+	size_t	i;
 	char	**copy;
 
 	copy = ft_calloc(count + 1, sizeof(char *));
