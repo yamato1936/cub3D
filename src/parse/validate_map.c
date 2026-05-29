@@ -12,25 +12,25 @@
 
 #include "../../includes/cub3d.h"
 
-static int	max_width(t_map *map)
+static size_t	max_width(t_map *map)
 {
-	int	i;
-	int	max;
+	size_t	i;
+	size_t	max;
 
 	max = 0;
 	i = 0;
 	while (i < map->height)
 	{
-		if ((int)ft_strlen(map->grid[i]) > max)
+		if (ft_strlen(map->grid[i]) > max)
 			max = ft_strlen(map->grid[i]);
 		i++;
 	}
 	return (max);
 }
 
-static void	fill_row(char *dst, char *src, int width)
+static void	fill_row(char *dst, char *src, size_t width)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (src[i] && i < width)
@@ -42,12 +42,32 @@ static void	fill_row(char *dst, char *src, int width)
 		dst[i++] = ' ';
 }
 
+static int	validate_map_dimensions(size_t width, size_t height)
+{
+	size_t	cells;
+
+	if (width > MAX_MAP_WIDTH)
+		return (error_msg("map width exceeds limit"));
+	if (height > MAX_MAP_HEIGHT)
+		return (error_msg("map height exceeds limit"));
+	if (height != 0 && width > SIZE_MAX / height)
+		return (error_msg("map dimensions overflow"));
+	cells = width * height;
+	if (cells > MAX_MAP_CELLS)
+		return (error_msg("map exceeds cell limit"));
+	return (1);
+}
+
 static int	normalize_map(t_game *game)
 {
-	int		i;
+	size_t	i;
+	size_t	width;
 	char	**copy;
 
-	game->map.width = max_width(&game->map);
+	width = max_width(&game->map);
+	if (!validate_map_dimensions(width, game->map.height))
+		return (0);
+	game->map.width = width;
 	copy = ft_calloc(game->map.height + 1, sizeof(char *));
 	if (!copy)
 		return (error_msg("failed to normalize map"));
@@ -67,7 +87,7 @@ static int	normalize_map(t_game *game)
 
 int	validate_scene(t_game *game)
 {
-	if (!game->map.grid || game->map.height <= 0)
+	if (!game->map.grid || game->map.height == 0)
 		return (error_msg("map is missing"));
 	if (!normalize_map(game))
 		return (0);

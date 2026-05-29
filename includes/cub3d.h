@@ -16,8 +16,10 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
+# include <stdint.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/time.h>
 # include <unistd.h>
 # include <X11/X.h>
@@ -27,6 +29,10 @@
 # define WIN_W 1024
 # define WIN_H 768
 # define PLANE_LEN 0.80
+# define MAX_MAP_WIDTH 512
+# define MAX_MAP_HEIGHT 512
+# define MAX_MAP_CELLS 1000000
+# define MAX_CUB_BYTES (8 * 1024 * 1024)
 
 typedef struct s_color
 {
@@ -62,8 +68,8 @@ typedef struct s_tex
 typedef struct s_map
 {
 	char	**grid;
-	int		width;
-	int		height;
+	size_t	width;
+	size_t	height;
 }	t_map;
 
 typedef struct s_player
@@ -177,7 +183,7 @@ char	*skip_spaces(char *s);
 int		is_empty_line(const char *s);
 int		is_map_line(const char *s);
 void	free_grid(char **grid);
-char	**dup_grid(const char **src, int count);
+char	**dup_grid(const char **src, size_t count);
 long	timestamp_ms(void);
 void	set_color(t_color *color, int r, int g, int b);
 int		error_msg(const char *msg);

@@ -14,7 +14,9 @@
 
 static char	map_at(t_game *game, int x, int y)
 {
-	if (x < 0 || y < 0 || y >= game->map.height || x >= game->map.width)
+	if (x < 0 || y < 0)
+		return (' ');
+	if ((size_t)y >= game->map.height || (size_t)x >= game->map.width)
 		return (' ');
 	return (game->map.grid[y][x]);
 }

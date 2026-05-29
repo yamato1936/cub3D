@@ -17,7 +17,7 @@ static int	is_player_char(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-static void	set_player(t_game *game, int x, int y, char dir)
+static void	set_player(t_game *game, size_t x, size_t y, char dir)
 {
 	game->player.x = x + 0.5;
 	game->player.y = y + 0.5;
@@ -31,7 +31,7 @@ static void	set_player(t_game *game, int x, int y, char dir)
 		game->player = (t_player){x + 0.5, y + 0.5, -1, 0, 0, -PLANE_LEN};
 }
 
-static int	scan_cell(t_game *game, int x, int y, int *players)
+static int	scan_cell(t_game *game, size_t x, size_t y, size_t *players)
 {
 	char	**grid;
 
@@ -50,20 +50,22 @@ static int	scan_cell(t_game *game, int x, int y, int *players)
 
 int	scan_map_cells(t_game *game)
 {
-	int		x;
-	int		y;
-	int		players;
+	size_t	x;
+	size_t	y;
+	size_t	players;
 
 	players = 0;
-	y = -1;
-	while (++y < game->map.height)
+	y = 0;
+	while (y < game->map.height)
 	{
-		x = -1;
-		while (++x < game->map.width)
+		x = 0;
+		while (x < game->map.width)
 		{
 			if (!scan_cell(game, x, y, &players))
 				return (0);
+			x++;
 		}
+		y++;
 	}
 	if (players != 1)
 		return (error_msg("map must contain exactly one player"));
